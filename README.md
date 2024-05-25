@@ -10,7 +10,7 @@ that counts as pressing shift once.
 Methodology:
 use the `wordfreq` Python library for word frequencies, 
 and the `jamo` library to decompose Hangul words into jamo.
-Then I decomposed the jamos into keypresses according to 3 different schemes listed below.
+Then I decomposed the jamos into keypresses according to 4 different schemes listed below.
 (I represent pressing shift with "S" and releasing with "U".
 I omit the entries where the jamo decomposes to itself, e.g. ㅏ → ㅏ in Dubeolsik, regardless of shift state).
 
@@ -92,6 +92,51 @@ Dubeolsik decomposition scheme but I made ㅆ unshifted and ㅠ shifted:
 
 (The motivation for this is that ㅆ is more frequent than ㅠ.)
 
+Dubeolsik decomposition scheme but I made ㅆ unshifted and ㅠ shifted and also many composite vowel jamos are shifted.
+```
+"ㅣ": "Uㅣ",
+"ㅡ": "Uㅡ",
+"ㅏ": "Uㅏ",
+"ㅐ": "Uㅐ",
+"ㅑ": "Uㅑ",
+"ㅓ": "Uㅓ",
+"ㅔ": "Uㅔ",
+"ㅕ": "Uㅕ",
+"ㅗ": "Uㅗ",
+"ㅜ": "Uㅜ",
+"ㄱ": "Uㄱ",
+"ㄷ": "Uㄷ",
+"ㅂ": "Uㅂ",
+"ㅈ": "Uㅈ",
+"ㅆ": "Uㅆ",
+"ㅟ": "Sㅣ", # notice all the composite vowels on the shift layer now
+"ㅢ": "Sㅡ",
+"ㅘ": "Sㅏ",
+"ㅙ": "Sㅐ",
+"ㅒ": "Sㅑ",
+"ㅝ": "Sㅓ",
+"ㅞ": "Sㅔ",
+"ㅖ": "Sㅕ",
+"ㅚ": "Sㅗ",
+"ㅠ": "Sㅜ",
+"ㄲ": "Sㄱ",
+"ㄸ": "Sㄷ",
+"ㅃ": "Sㅂ",
+"ㅉ": "Sㅈ",
+"ㄶ": "ㄴㅎ",
+"ㅄ": "ㅂㅅ",
+"ㄺ": "ㄹㄱ",
+"ㅀ": "ㄹㅎ",
+"ㄻ": "ㄹㅁ",
+"ㄼ": "ㄹㅂ",
+"ㄵ": "ㄴㅈ",
+"ㄳ": "ㄱㅅ",
+"ㄾ": "ㄹㅌ",
+"ㄿ": "ㄹㅍ",
+```
+
+(The motivation here was that I realized that my metric always counts shift keys as not worse than two consecutive keypresses.)
+
 A scheme I made up where yin vowels are shifted and yang vowels are unshifted:
 ```
 "ㄳ": "ㄱㅅ",
@@ -149,11 +194,13 @@ Then I multiplied the number of keypresses for that word by its `word_frequency`
 
 | decomposition scheme | frequency per word * keypresses |
 |--|--|
+| Dubeolsik (ㅠㅆ and many vowels altered) | 3.465424509999993 |
 | Dubeolsik (ㅠㅆ altered) | 3.4722890599999916 |
 | Dubeolsik | 3.485696489999989 |
 | "Yinyang" | 3.618027129999951 |
 
-It seems that the average word is 3.4 keypresses long. Basically Dubeolsik is pretty good already: the principle of assigning the least common jamo to the shift layer seems superior.
+It seems that the average word is 3.4 keypresses long. 
+Basically Dubeolsik is pretty good already: the principle of assigning the least common jamo to the shift layer seems superior.
 
 ## Appendix: Jamo frequencies
 I calculated the jamo frequencies as follows:
